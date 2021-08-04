@@ -1,0 +1,169 @@
+{
+	"info": {
+		"_postman_id": "5ec31286-d5cf-4e5c-af9d-5e5979d88346",
+		"name": "Kafka Bridge - AMQ Streams",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Producer",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.kafka.json.v2+json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"records\": [ { \"key\": \"k1\", \"value\": \"100\"}]}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://kafka-bridge-mykafka.apps.cluster-melb-8a09.melb-8a09.sandbox942.opentlc.com/topics/my-topic",
+					"protocol": "http",
+					"host": [
+						"kafka-bridge-mykafka",
+						"apps",
+						"cluster-melb-8a09",
+						"melb-8a09",
+						"sandbox942",
+						"opentlc",
+						"com"
+					],
+					"path": [
+						"topics",
+						"my-topic"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Subscribe Consumer",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Subscribe to a Topic",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.kafka.v2+json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"topics\": [\"my-topic\"]}"
+				},
+				"url": {
+					"raw": "/subscription",
+					"path": [
+						"subscription"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consume from a Topic",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {
+					"accept": true,
+					"content-length": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/vnd.kafka.v2+json",
+						"type": "text"
+					},
+					{
+						"key": "key",
+						"value": "16d91b388accc36d0367c3f956299679",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://kafka-bridge-mykafka.apps.cluster-melb-8a09.melb-8a09.sandbox942.opentlc.com:80/consumers/my-group/instances/my-consumer/records",
+					"protocol": "http",
+					"host": [
+						"kafka-bridge-mykafka",
+						"apps",
+						"cluster-melb-8a09",
+						"melb-8a09",
+						"sandbox942",
+						"opentlc",
+						"com"
+					],
+					"port": "80",
+					"path": [
+						"consumers",
+						"my-group",
+						"instances",
+						"my-consumer",
+						"records"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
